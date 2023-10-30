@@ -12,12 +12,12 @@ exams = [
 ]
 
 def print_table(date, day, t, grade, ch):
-    print("{:<6}    {:<10}    {:<5}    {:<8}    {:<5}".format(date, day, t, grade, ch))
+    print(f"{date:<6}    {day:<10}    {t:<5}    {grade:<8}    {ch:<5}")
 
 print()
 print_table("Date", "Day", "Class", "Subject", "Chapter")
 print_table("----", "---", "-----", "-------", "-------")
 for exam in exams:
     if datetime.now() < (exam.time + timedelta(hours=2)):
-        time = exam.time.strftime
-        print_table(time("%d/%m"), time("%A"), exam.grade, exam.subject, exam.lessons)
+        strftime = exam.time.strftime
+        print_table(strftime("%d/%m"), strftime("%A"), exam.grade, exam.subject, exam.lessons)
