@@ -1,4 +1,5 @@
-from math import sqrt, gcd
+from math import sqrt
+from fractions import Fraction
 from dataclasses import dataclass
 
 
@@ -24,9 +25,11 @@ class Line:
     x2: float = 0
     y2: float = 0
 
+    # pylint: disable-next=too-many-arguments, unused-argument
     def __new__(cls, name, x1=0, y1=0, x2=0, y2=0):
-        if (x1 != x2) or (y1 != y2):
+        if (x1, y1) != (x2, y2):
             return super().__new__(cls)
+        return None
 
     @property
     def center(self):
@@ -43,9 +46,7 @@ class Line:
 
     @property
     def equation(self):
-        # sorted for taking min value in first term
-        x1, x2 = sorted([self.x1, self.x2])
-        y1, y2 = sorted([self.y1, self.y2])
+        x1, y1, x2, y2 = self.x1, self.y1, self.x2, self.y2
 
         # if x or y unchanged it's parallel to axis
         if x1 == x2:
@@ -53,18 +54,11 @@ class Line:
         if y1 == y2:
             return f'y = {y1}'
 
-        d = gcd(x2-x1, y2-y1)
-        a, b = (x2 - x1)//d, (y2 - y1)//d
-        if a == b:
-            a = b = ''
+        #    (y - y1)/(x - x1) = (y2 - y1)/(x2 - x1) = n/d
+        # => dy - nx = d•y1 - n•x1
+        n, d = Fraction(y2-y1, x2-x1).as_integer_ratio()
+        dy = "y" if d == 1 else f"{d}y"
+        nx = "x" if abs(n) == 1 else f"{abs(n)}x"
+        sign = "-" if n > 0 else "+"
 
-        def decider(val, val_other, z, cor):
-            z = '' if z == 1 else z
-            if not val or (a*y1 == b*x1):
-                return f'{z}{cor}'
-            else:
-                return f'{z}({cor} - {val})'
-
-        lhs = decider(y1, x1, a, 'y')
-        rhs = decider(x1, y1, b, 'x')
-        return lhs + " = " + rhs
+        return f"{dy} {sign} {nx} = {d*y1 - n*x1}"
