@@ -2,9 +2,11 @@ from random import choice
 
 print("-: Welcome to Rock  //  Paper  // Scissor :-".center(70))
 
+# pylint: disable-next=invalid-name
 c = p = 0
 
 for _ in range(10):
+    # pylint: disable=bad-indentation
 	prs = ["Paper", "Rock", "Scissor"]
 	comp = choice(prs)
 	di = {"r":"Rock", "p":"Paper", "s":"Scissor"}

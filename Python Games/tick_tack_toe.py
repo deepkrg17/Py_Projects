@@ -1,6 +1,6 @@
-def print_table(game_table):
+def print_table(g_table):
     table = []
-    for row in game_table:
+    for row in g_table:
         table.append(" " + " | ".join(row))
     print(" \n---|---|---\n".join(table))
 

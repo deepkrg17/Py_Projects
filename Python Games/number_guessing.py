@@ -1,7 +1,8 @@
 import random
 a = random.randint(1, 100)
 i = 10
-while(i!=0):
+while i != 0:
+	# pylint: disable=bad-indentation
 	print(f"You have {i} guesses")
 	b = int(input("\nEnter a number between 1 & 100:    "))
 	if b>a:
