@@ -85,3 +85,7 @@ class MyList:
     def sort(self):
         for idx, item in enumerate(sorted(self.items)):
             self.items[idx] = item
+
+    def __iter__(self):
+        for i in range(self.size):
+            yield self[i]
