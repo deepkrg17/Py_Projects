@@ -1,5 +1,6 @@
 from ctypes import py_object
 
+
 class MyList:
     def __init__(self):
         self.capacity = 8

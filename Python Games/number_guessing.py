@@ -1,4 +1,5 @@
 import random
+
 a = random.randint(1, 100)
 i = 10
 while i != 0:

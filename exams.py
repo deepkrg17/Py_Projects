@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+
 class Exam:
     def __init__(self, subject, lessons, grade, time):
         self.subject = subject
